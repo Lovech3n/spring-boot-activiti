@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>activiti</title>
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="row">
+	<div class="col-md-6">已部署的流程</div>
+	<div class="col-md-6">
+		<form action="/deply" method="post" enctype="multipart/form-data">
+			<input name="file" type="file">
+			<input type="submit" value="部署">
+		</form>
+	</div>
+</div>
+<table class="table table-bordered table-condensed">
+	<tr>
+		<td>流程定义的ID</td>
+		<td>部署ID</td>
+		<td>流程定义名称</td>
+		<td>流程定义KEY</td>
+		<td>版本号</td>
+		<td>XML资源名称</td>
+		<td>图片资源名称</td>
+		<td>操作</td>
+	</tr>
+	<tbody>
+		@for(temp in ilist){
+			<tr>
+				<td>${temp.id}</td>
+				<td>${temp.deploymentId}</td>
+				<td>${temp.name}</td>
+				<td>${temp.key}</td>
+				<td>${temp.version}</td>
+				<td><a href="/showXml?id=${temp.id}">${temp.resourceName}</a></td>
+				<td><a href="/showPic?id=${temp.id}">${temp.diagramResourceName}</a></td>
+				<td><a href="/delDefinition?depId=${temp.deploymentId}">删除流程部署</a></td>
+			</tr>
+		@}
+	</tbody>
+</table>
+</body>
+</html>
